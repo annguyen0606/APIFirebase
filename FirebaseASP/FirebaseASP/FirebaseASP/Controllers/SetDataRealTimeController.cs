@@ -19,7 +19,7 @@ namespace FirebaseASP.Controllers
         // GET: SetDataRealTime
         String pathDuLieuDiemDanh = "Conek/DuLieuDiemDanh/";
         String pathDanhSachNhanVien = "Conek/DanhSachNhanVien/";
-        String pathServer = "https://annguyenhoctap.firebaseio.com/";
+        //String pathServer = "https://annguyenhoctap.firebaseio.com/";
         IFirebaseConfig config = new FirebaseConfig
         {
             AuthSecret = "",
@@ -37,9 +37,23 @@ namespace FirebaseASP.Controllers
             var cde = this.ControllerContext.RouteData.Values["Tag"];
             uidTag = cde.ToString();
             client = new FireSharp.FirebaseClient(config);
+            int soGio = int.Parse(DateTime.Now.ToString("hh"));
+            int soPhut = int.Parse(DateTime.Now.ToString("mm"));
+            int soPhutMuon = 0;
+            if(soGio >= 8 && soGio < 12)
+            {
+                soPhutMuon = soGio * 60 + soPhut - 8 * 60 - 30;
+            }else if(soGio >= 13 && soGio < 18)
+            {
+                soPhutMuon = soGio * 60 + soPhut - 13 * 60 - 30;
+            }
+            else
+            {
+                soPhutMuon = 0;
+            }
             if (client != null)
             {
-                PushResponse response = client.Push(pathDuLieuDiemDanh + uidTag + "/"+DateTime.Now.ToString("yyyy-MM-dd"), DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"));
+                PushResponse response = client.Push(pathDuLieuDiemDanh + uidTag + "/"+DateTime.Now.ToString("yyyy-MM-dd"), DateTime.Now.ToString("hh:mm:ss") + "," +soPhutMuon);
                 if (!String.IsNullOrEmpty(response.Result.name.ToString()))
                 {
                     //var firebaseClient = new FirebaseClient(pathServer);
