@@ -195,9 +195,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\MainLayout\FrontEndLayout.cshtml" />
     <Content Include="Views\SetDataRealTime\SetDataFirebase.cshtml" />
+    <Content Include="Views\MainLayout\LoginLayout.cshtml" />
+    <Content Include="Views\Home\IndexView.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
